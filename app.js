@@ -90,7 +90,7 @@ app.use('/users', users);
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static('views/layout'));
 
-  app.get('*', (req, res) => {
+  app.get('*', (res) => {
     res.sendFile(path.resolve(__dirname, 'views/layout', 'layout.handlebars'));
   });
 }
