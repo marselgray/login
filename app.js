@@ -10,6 +10,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+/* */
+const path = require('path');
 
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.conection;
@@ -82,6 +84,18 @@ app.use('/', routes);
 app.use('/users', users);
 
 //Port Setup
+
+
+/* */
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('views/layout'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'views/layout', 'layout.handlebars'));
+  });
+}
+
+/* */
 
 app.set('port', (process.env.PORT || 3000));
 
